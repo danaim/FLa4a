@@ -300,8 +300,8 @@ PARAMETER_SECTION
 //  sdreport_number r_last
 //  sdreport_vector fpar_vec(1,noFpar)
 
-//  profile for ssbmaxYear
-likeprof_number ssbmaxYear
+//  profile for ssbminYear
+likeprof_number ssbminYear
 
 
 // *********************************
@@ -455,7 +455,7 @@ PROCEDURE_SECTION
 //    }
 //    fbar(y) /= fbarRange(2)-fbarRange(1)+1;
   }
-
+  ssbminYear = ssb(minYear);
   ssbmaxYear = ssb(maxYear);
 //  stateofstock(1) = ssb(maxYear);
 //  stateofstock(2) = fbar(maxYear);
