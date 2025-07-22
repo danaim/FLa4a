@@ -300,6 +300,9 @@ PARAMETER_SECTION
 //  sdreport_number r_last
 //  sdreport_vector fpar_vec(1,noFpar)
 
+//  profile for ssbmaxYear
+likeprof_number ssbmaxYear
+
 
 // *********************************
 //

@@ -1331,6 +1331,8 @@ fitADMB <- function(fit, wkdir, df.data, stock, indices, full.df,
 
   # arguments
   args <- character(0)
+  # likelihood profile
+  if (fit == "assessment") args <- c(args, "-lprof")
   # MCMC
   if (fit == "MCMC") args <- getADMBCallArgs(mcmc)
   # if running an MSE no need to work out hessian
