@@ -290,7 +290,8 @@ PARAMETER_SECTION
 
   vector ssb(minYear,maxYear)
   sdreport_number ssbmaxYear
-
+  vector fbar(minYear,maxYear)
+  
   // return value for likelihood components
   vector nllikcomp(1,nsurveys+1+SRflag)
 
@@ -300,8 +301,9 @@ PARAMETER_SECTION
 //  sdreport_number r_last
 //  sdreport_vector fpar_vec(1,noFpar)
 
-//  profile for ssbminYear
-likeprof_number ssbminYear
+//  profile for ssb maxYear
+likeprof_number ssbMYear
+likeprof_number fbarMYear
 
 
 // *********************************
@@ -449,14 +451,19 @@ PROCEDURE_SECTION
   for(int y=minYear; y<=maxYear; ++y){
 	ssb(y) = sum(elem_prod(mfexp(n(y)-mfexp(f(y))*fspwn(y)-mfexp(m(y))*mspwn(y)), matWt(y)));
 //	ssb(y) = sum(elem_prod(mfexp(n(y)), matWt(y)));
-//    fbar(y) = 0.0;
-//    for(int a=fbarRange(1); a<=fbarRange(2); ++a){
-//      fbar(y) += mfexp(f(y,a));
-//    }
-//    fbar(y) /= fbarRange(2)-fbarRange(1)+1;
+    fbar(y) = 0.0;
+    for(int a=fbarRange(1); a<=fbarRange(2); ++a){
+      fbar(y) += mfexp(f(y,a));
+    }
+    fbar(y) /= fbarRange(2)-fbarRange(1)+1;
   }
-  ssbminYear = ssb(minYear);
+
   ssbmaxYear = ssb(maxYear);
+  
+  // for the likelihood profile
+  ssbMYear = ssb(maxYear);
+  fbarMYear = fbar(maxYear);
+
 //  stateofstock(1) = ssb(maxYear);
 //  stateofstock(2) = fbar(maxYear);
   for (int i=1; i<=nsurveys+1+SRflag; i++) {
